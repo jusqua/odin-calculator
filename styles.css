@@ -1,0 +1,110 @@
+:root {
+  user-select: none;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+* {
+  border-radius: 8px;
+}
+
+body {
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+#calculator {
+  display: flex;
+  flex-direction: column;
+  border: 8px #555 solid;
+  width: 20rem;
+  height: 30rem;
+  padding: .5rem;
+  gap: .5rem;
+}
+
+.screen {
+  width: calc(100% - 2*var(--padding));
+  margin: 0;
+  border: 0;
+  padding: var(--padding);
+  background-color: #555;
+  color: snow;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+#upper-screen {
+  border-radius: 8px 8px 0 0;
+  height: 1rem;
+}
+
+#lower-screen {
+  height: 3rem;
+  padding: 8px;
+  border-radius: 0 0 8px 8px;
+  font-size: 2rem;
+}
+
+#buttons {
+  --gap: 8px;
+  display: inline-flex;
+  gap: var(--gap);
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+#buttons button {
+  --bg-color: #DDD;
+  border: 0;
+  padding: 0;
+  flex: 1 1 calc(25% - var(--gap));
+  font-size: 1.5rem;
+  background-color: var(--bg-color);
+  transition: .1s filter;
+  font-family: monospace;
+}
+
+#buttons button:hover {
+  outline: 2px var(--bg-color) solid;
+}
+
+#buttons button:active {
+  filter: brightness(1.2);
+}
+
+#buttons #clear {
+  --bg-color: mediumseagreen;
+  color: snow;
+}
+
+#buttons #dot {
+  --bg-color: gray;
+  color: snow;
+}
+
+#buttons #delete {
+  --bg-color: tomato;
+  color: snow;
+}
+
+#buttons .operator {
+  --bg-color: goldenrod;
+  color: snow;
+}
+
+#buttons #eval {
+  --bg-color: slateblue;
+  color: snow;
+  flex-grow: 2;
+  flex-basis: calc(50% - var(--gap));
+}
+
