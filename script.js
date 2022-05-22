@@ -30,7 +30,13 @@ function main() {
 
 function handleNumber(number, currentValue) {
   handleError(currentValue);
-  currentValue.innerText = parseFloat(currentValue.innerText + number);
+  currentValue.innerText += number;
+  if (currentValue.innerText.indexOf('.') !== -1) {
+    const [head, tail] = currentValue.innerText.split('.');
+    currentValue.innerText = `${parseInt(head)}.${tail}`;
+  } else {
+    currentValue.innerText = parseInt(currentValue.innerText);
+  }
 }
 
 function handleDelete(currentValue) {
