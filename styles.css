@@ -40,6 +40,7 @@ body {
   align-items: center;
   overflow: hidden;
   text-overflow: clip;
+  padding: 8px;
 }
 
 #upper-screen {
@@ -49,7 +50,6 @@ body {
 
 #lower-screen {
   height: 3rem;
-  padding: 8px;
   border-radius: 0 0 8px 8px;
   font-size: 2rem;
 }

@@ -17,6 +17,7 @@ function main() {
 
   numberButtons.forEach(button => button.addEventListener("click", e => handleNumber(e.target.innerText, currentValue)));
   operatorButtons.forEach(button => button.addEventListener("click", e => handleOperator(e.target.innerText, expression, lastValue, currentValue)));
+
   dotButton.addEventListener("click", () => handleDot(currentValue));
 
   deleteButton.addEventListener("click", () => handleDelete(currentValue));
@@ -25,6 +26,7 @@ function main() {
 }
 
 function handleNumber(number, currentValue) {
+  handleError(currentValue);
   currentValue.innerText = parseFloat(currentValue.innerText + number);
 }
 
@@ -48,14 +50,67 @@ function handleClear(expression, lastValue, currentValue) {
 }
 
 function handleOperator(operator, expression, lastValue, currentValue) {
+  if (handleError(currentValue)) return;
+  const currentOperator = operator;
+
+  const firstValue = (lastValue.innerText && lastValue.innerText.indexOf('=') === -1) &&
+    handleEval(expression, lastValue, currentValue) || currentValue.innerText;
+
+  if (!firstValue) return;
+
   expression.value = currentValue.innerText;
   expression.operator = operator;
+
   lastValue.innerText = `${expression.value} ${expression.operator}`;
   currentValue.innerText = 0;
 }
 
 function handleEval(expression, lastValue, currentValue) {
+  const firstValue = parseFloat(expression.value);
+  const secondValue = parseFloat(currentValue.innerText);
+  const operator = expression.operator;
+  const operation = getOperation(operator);
+  const result = operation(firstValue, secondValue);
 
+  handleClear(expression, lastValue, currentValue);
+
+  if (!isFinite(result) || isNaN(result)) {
+    currentValue.innerText = "Zero Division";
+    return '';
+  } else {
+
+  }
+
+  currentValue.innerText = result;
+  lastValue.innerText = `${firstValue} ${operator} ${secondValue} =`;
+
+  return result;
+}
+
+function getOperation(operator) {
+  switch (operator) {
+    case '+':
+      return ((a, b) => a + b);
+    case '−':
+      return ((a, b) => a - b);
+    case '✕':
+      return ((a, b) => a * b);
+    case '÷':
+      return ((a, b) => a / b);
+    case 'mod':
+      return ((a, b) => a % b);
+    default:
+      return ((a, b) => console.log("Something is wrong..."));
+  }
+}
+
+function handleError(currentValue) {
+  const value = currentValue.innerText;
+  if (isFinite(value) && !isNaN(value))
+    return false;
+
+  currentValue.innerText = 0;
+  return true;
 }
 
 main();
