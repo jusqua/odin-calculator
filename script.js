@@ -87,12 +87,13 @@ function handleEval(expression, lastValue, currentValue) {
   if (!isFinite(result) || isNaN(result)) {
     currentValue.innerText = "Zero Division";
     return '';
-  } else {
-
   }
 
   currentValue.innerText = result;
   lastValue.innerText = `${firstValue} ${operator} ${secondValue} =`;
+
+  expression.value = secondValue;
+  expression.operator = operator;
 
   return result;
 }
