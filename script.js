@@ -4,8 +4,10 @@ function main() {
 
   const evalButton = document.querySelector('#eval');
   const clearButton = document.querySelector('#clear');
-  const dotButton = document.querySelector('#dot');
   const deleteButton = document.querySelector('#delete');
+
+  const dotButton = document.querySelector('#dot');
+  const signButton = document.querySelector('#sign');
 
   const operatorButtons = document.querySelectorAll('.operator');
   const numberButtons = document.querySelectorAll('.number');
@@ -19,6 +21,7 @@ function main() {
   operatorButtons.forEach(button => button.addEventListener("click", e => handleOperator(e.target.innerText, expression, lastValue, currentValue)));
 
   dotButton.addEventListener("click", () => handleDot(currentValue));
+  signButton.addEventListener("click", () => handleSign(currentValue));
 
   deleteButton.addEventListener("click", () => handleDelete(currentValue));
   clearButton.addEventListener("click", () => handleClear(expression, lastValue, currentValue));
@@ -39,6 +42,13 @@ function handleDelete(currentValue) {
 function handleDot(currentValue) {
   if (currentValue.innerText.indexOf('.') === -1)
     currentValue.innerText += '.';
+}
+
+function handleSign(currentValue) {
+  if (currentValue.innerText.indexOf('-') === -1)
+    currentValue.innerText = '-' + currentValue.innerText;
+  else
+    currentValue.innerText = currentValue.innerText.slice(1);
 }
 
 function handleClear(expression, lastValue, currentValue) {
