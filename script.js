@@ -82,6 +82,8 @@ function handleOperator(operator, expression, lastValue, currentValue) {
 }
 
 function handleEval(expression, lastValue, currentValue) {
+  if (!expression.value) return;
+
   const firstValue = parseFloat(expression.value);
   const secondValue = parseFloat(currentValue.innerText);
   const operator = expression.operator;
